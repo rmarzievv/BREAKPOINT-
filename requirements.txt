@@ -1,0 +1,3 @@
+-r vendor/detection-as-code/requirements.txt
+pandas>=2.2
+openpyxl>=3.1

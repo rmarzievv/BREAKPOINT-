@@ -1,0 +1,3 @@
+[submodule "vendor/detection-as-code"]
+	path = vendor/detection-as-code
+	url = https://github.com/rmarzievv/detection-as-code.git

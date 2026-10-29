@@ -1,0 +1,40 @@
+technique_id,implementation,source,status,reason_code,duplicate_of,note
+T1053.005,Scheduled task creation via schtasks CLI,catalog,include,,,
+T1053.005,Scheduled task creation via PowerShell CIM,catalog,include,,,
+T1053.005,Remote scheduled task creation via schtasks,catalog,exclude,E2,,requires remote host
+T1053.005,Hidden scheduled task creation,catalog,include,,,
+T1543.003,Create New Windows Service,catalog,include,,,catalog merges two different step lists under this name (RQ3 defect)
+T1543.003,Modify Existing Service,catalog,include,,,
+T1543.003,Remote Service Creation,catalog,exclude,E2,,requires remote host
+T1082,Native OS Command System Information Discovery,catalog,include,,,
+T1082,Registry Query System Information Discovery,catalog,include,,,
+T1082,WMI/PowerShell Query System Information Discovery,catalog,include,,,
+T1082,Cloud Metadata API System Information Discovery,catalog,exclude,E2,,requires cloud VM
+T1082,Network Device CLI System Information Discovery,catalog,exclude,E1,,"network device, not Windows"
+T1082,Environment Variable Enumeration System Information Discovery,catalog,include,,,
+T1057,Command-line utility process enumeration,catalog,include,,,
+T1057,Native API process enumeration,catalog,include,,,
+T1057,WMI process enumeration,catalog,include,,,
+T1057,PowerShell process enumeration,catalog,include,,,
+T1057,/proc filesystem process enumeration,catalog,exclude,E1,,Linux
+T1057,Remote service process enumeration,catalog,exclude,E2,,requires remote host
+T1018,ICMP Ping Sweep Discovery,catalog,include,,,
+T1018,Net Command SMB Enumeration,catalog,include,,,net view may fail without a domain/browser service; oracle outcome feeds RQ3
+T1018,Active Directory Computer Object Query,catalog,exclude,E2,,requires AD
+T1018,ARP Cache Enumeration,catalog,include,,,
+T1018,NetBIOS Name Scan (NBTscan),catalog,include,,,nbtscan is a third-party binary; pin its hash
+T1018,DNS Cache/Query Enumeration,catalog,include,,,
+T1018,WMI Computer Enumeration,catalog,include,,,local WMI query only; remote RPC step not executed
+T1018,Azure AD Enumeration,catalog,exclude,E2,,requires Azure AD tenant
+T1543.003,Modify Existing Windows Service,catalog,exclude,E4,Modify Existing Service,same ImagePath/ChangeServiceConfig mechanism
+T1053.005,Create Windows scheduled task via schtasks CLI,catalog,exclude,E4,Scheduled task creation via schtasks CLI,same tool and arguments
+T1053.005,Create Windows scheduled task via PowerShell cmdlet,catalog,exclude,E4,Scheduled task creation via PowerShell CIM,both name Register-ScheduledTask / Invoke-CimMethod
+T1053.005,Create hidden scheduled task by deleting Security Descriptor,catalog,exclude,E4,Hidden scheduled task creation,same SD-deletion mechanism
+T1053.005,Create scheduled task via GhostTask registry manipulation,catalog,include,,,"third-party binary, needs SYSTEM; pin its hash"
+T1016,OS Command Network Configuration Discovery,catalog,include,,,
+T1016,System API Network Configuration Discovery,catalog,include,,,
+T1016,External Service Public IP Discovery,catalog,include,,,needs outbound internet from the lab host
+T1016,Network Device CLI Discovery,catalog,exclude,E1,,"network device, not Windows"
+T1016,Registry Proxy Configuration Discovery,catalog,include,,,
+T1543.003,Remote Windows Service Creation,catalog,exclude,E2,,requires remote host; also near-duplicate of Remote Service Creation
+T1018,ARP cache via PowerShell Get-NetNeighbor,manual,include,,,no new process; CIM provider inside powershell.exe

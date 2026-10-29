@@ -1,0 +1,377 @@
+technique_id,rule_file,implementation,dcc_covered
+T1543.003,win_security_cobaltstrike_service_installs.yml,Create New Windows Service,yes
+T1543.003,win_security_cobaltstrike_service_installs.yml,Modify Existing Service,no
+T1053.005,win_security_gpo_scheduledtasks.yml,Scheduled task creation via schtasks CLI,no
+T1053.005,win_security_gpo_scheduledtasks.yml,Scheduled task creation via PowerShell CIM,no
+T1053.005,win_security_gpo_scheduledtasks.yml,Hidden scheduled task creation,no
+T1053.005,win_security_gpo_scheduledtasks.yml,Create scheduled task via GhostTask registry manipulation,no
+T1053.005,win_security_hktl_defendnot_default_scheduled_task_activity.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,win_security_hktl_defendnot_default_scheduled_task_activity.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,win_security_hktl_defendnot_default_scheduled_task_activity.yml,Hidden scheduled task creation,yes
+T1053.005,win_security_hktl_defendnot_default_scheduled_task_activity.yml,Create scheduled task via GhostTask registry manipulation,no
+T1543.003,win_security_service_install_remote_access_software.yml,Create New Windows Service,yes
+T1543.003,win_security_service_install_remote_access_software.yml,Modify Existing Service,no
+T1053.005,win_security_susp_scheduled_task_creation.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,win_security_susp_scheduled_task_creation.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,win_security_susp_scheduled_task_creation.yml,Hidden scheduled task creation,yes
+T1053.005,win_security_susp_scheduled_task_creation.yml,Create scheduled task via GhostTask registry manipulation,no
+T1053.005,win_security_susp_scheduled_task_delete_or_disable.yml,Scheduled task creation via schtasks CLI,no
+T1053.005,win_security_susp_scheduled_task_delete_or_disable.yml,Scheduled task creation via PowerShell CIM,no
+T1053.005,win_security_susp_scheduled_task_delete_or_disable.yml,Hidden scheduled task creation,no
+T1053.005,win_security_susp_scheduled_task_delete_or_disable.yml,Create scheduled task via GhostTask registry manipulation,no
+T1053.005,win_security_susp_scheduled_task_update.yml,Scheduled task creation via schtasks CLI,no
+T1053.005,win_security_susp_scheduled_task_update.yml,Scheduled task creation via PowerShell CIM,no
+T1053.005,win_security_susp_scheduled_task_update.yml,Hidden scheduled task creation,no
+T1053.005,win_security_susp_scheduled_task_update.yml,Create scheduled task via GhostTask registry manipulation,no
+T1543.003,win_system_cobaltstrike_service_installs.yml,Create New Windows Service,no
+T1543.003,win_system_cobaltstrike_service_installs.yml,Modify Existing Service,no
+T1543.003,win_system_moriya_rootkit.yml,Create New Windows Service,no
+T1543.003,win_system_moriya_rootkit.yml,Modify Existing Service,no
+T1543.003,win_system_service_install_pdqdeploy.yml,Create New Windows Service,no
+T1543.003,win_system_service_install_pdqdeploy.yml,Modify Existing Service,no
+T1543.003,win_system_service_install_pdqdeploy_runner.yml,Create New Windows Service,no
+T1543.003,win_system_service_install_pdqdeploy_runner.yml,Modify Existing Service,no
+T1543.003,win_system_service_install_pua_proceshacker.yml,Create New Windows Service,no
+T1543.003,win_system_service_install_pua_proceshacker.yml,Modify Existing Service,no
+T1543.003,win_system_service_install_remote_access_software.yml,Create New Windows Service,no
+T1543.003,win_system_service_install_remote_access_software.yml,Modify Existing Service,no
+T1543.003,win_system_service_install_sliver.yml,Create New Windows Service,no
+T1543.003,win_system_service_install_sliver.yml,Modify Existing Service,no
+T1543.003,win_system_service_install_susp.yml,Create New Windows Service,no
+T1543.003,win_system_service_install_susp.yml,Modify Existing Service,no
+T1543.003,win_system_service_install_uncommon.yml,Create New Windows Service,no
+T1543.003,win_system_service_install_uncommon.yml,Modify Existing Service,no
+T1543.003,win_system_susp_service_installation_folder.yml,Create New Windows Service,no
+T1543.003,win_system_susp_service_installation_folder.yml,Modify Existing Service,no
+T1543.003,win_system_susp_service_installation_folder_pattern.yml,Create New Windows Service,no
+T1543.003,win_system_susp_service_installation_folder_pattern.yml,Modify Existing Service,no
+T1543.003,win_system_susp_service_installation_script.yml,Create New Windows Service,no
+T1543.003,win_system_susp_service_installation_script.yml,Modify Existing Service,no
+T1053.005,win_taskscheduler_execution_from_susp_locations.yml,Scheduled task creation via schtasks CLI,no
+T1053.005,win_taskscheduler_execution_from_susp_locations.yml,Scheduled task creation via PowerShell CIM,no
+T1053.005,win_taskscheduler_execution_from_susp_locations.yml,Hidden scheduled task creation,no
+T1053.005,win_taskscheduler_execution_from_susp_locations.yml,Create scheduled task via GhostTask registry manipulation,no
+T1053.005,win_taskscheduler_lolbin_execution_via_task_scheduler.yml,Scheduled task creation via schtasks CLI,no
+T1053.005,win_taskscheduler_lolbin_execution_via_task_scheduler.yml,Scheduled task creation via PowerShell CIM,no
+T1053.005,win_taskscheduler_lolbin_execution_via_task_scheduler.yml,Hidden scheduled task creation,no
+T1053.005,win_taskscheduler_lolbin_execution_via_task_scheduler.yml,Create scheduled task via GhostTask registry manipulation,no
+T1543.003,driver_load_win_mal_drivers.yml,Create New Windows Service,no
+T1543.003,driver_load_win_mal_drivers.yml,Modify Existing Service,no
+T1543.003,driver_load_win_mal_drivers_names.yml,Create New Windows Service,no
+T1543.003,driver_load_win_mal_drivers_names.yml,Modify Existing Service,no
+T1543.003,driver_load_win_susp_temp_use.yml,Create New Windows Service,no
+T1543.003,driver_load_win_susp_temp_use.yml,Modify Existing Service,no
+T1543.003,driver_load_win_vuln_drivers.yml,Create New Windows Service,no
+T1543.003,driver_load_win_vuln_drivers.yml,Modify Existing Service,no
+T1543.003,driver_load_win_vuln_drivers_names.yml,Create New Windows Service,no
+T1543.003,driver_load_win_vuln_drivers_names.yml,Modify Existing Service,no
+T1543.003,driver_load_win_vuln_hevd_driver.yml,Create New Windows Service,no
+T1543.003,driver_load_win_vuln_hevd_driver.yml,Modify Existing Service,no
+T1543.003,driver_load_win_vuln_winring0_driver.yml,Create New Windows Service,no
+T1543.003,driver_load_win_vuln_winring0_driver.yml,Modify Existing Service,no
+T1543.003,file_event_win_sysinternals_psexec_service_key.yml,Create New Windows Service,yes
+T1543.003,file_event_win_sysinternals_psexec_service_key.yml,Modify Existing Service,no
+T1016,net_connection_win_domain_external_ip_lookup.yml,OS Command Network Configuration Discovery,no
+T1016,net_connection_win_domain_external_ip_lookup.yml,System API Network Configuration Discovery,no
+T1016,net_connection_win_domain_external_ip_lookup.yml,External Service Public IP Discovery,yes
+T1016,net_connection_win_domain_external_ip_lookup.yml,Registry Proxy Configuration Discovery,no
+T1053.005,posh_ps_cmdlet_scheduled_task.yml,Scheduled task creation via schtasks CLI,no
+T1053.005,posh_ps_cmdlet_scheduled_task.yml,Scheduled task creation via PowerShell CIM,no
+T1053.005,posh_ps_cmdlet_scheduled_task.yml,Hidden scheduled task creation,no
+T1053.005,posh_ps_cmdlet_scheduled_task.yml,Create scheduled task via GhostTask registry manipulation,no
+T1018,posh_ps_directorysearcher.yml,ICMP Ping Sweep Discovery,no
+T1018,posh_ps_directorysearcher.yml,Net Command SMB Enumeration,no
+T1018,posh_ps_directorysearcher.yml,ARP Cache Enumeration,no
+T1018,posh_ps_directorysearcher.yml,NetBIOS Name Scan (NBTscan),no
+T1018,posh_ps_directorysearcher.yml,DNS Cache/Query Enumeration,no
+T1018,posh_ps_directorysearcher.yml,WMI Computer Enumeration,no
+T1018,posh_ps_get_adcomputer.yml,ICMP Ping Sweep Discovery,no
+T1018,posh_ps_get_adcomputer.yml,Net Command SMB Enumeration,no
+T1018,posh_ps_get_adcomputer.yml,ARP Cache Enumeration,no
+T1018,posh_ps_get_adcomputer.yml,NetBIOS Name Scan (NBTscan),no
+T1018,posh_ps_get_adcomputer.yml,DNS Cache/Query Enumeration,no
+T1018,posh_ps_get_adcomputer.yml,WMI Computer Enumeration,no
+T1082,posh_ps_hktl_winpwn.yml,Native OS Command System Information Discovery,no
+T1082,posh_ps_hktl_winpwn.yml,Registry Query System Information Discovery,no
+T1082,posh_ps_hktl_winpwn.yml,WMI/PowerShell Query System Information Discovery,no
+T1082,posh_ps_hktl_winpwn.yml,Environment Variable Enumeration System Information Discovery,no
+T1018,posh_ps_potential_unconstrained_delegation_discovery.yml,ICMP Ping Sweep Discovery,no
+T1018,posh_ps_potential_unconstrained_delegation_discovery.yml,Net Command SMB Enumeration,no
+T1018,posh_ps_potential_unconstrained_delegation_discovery.yml,ARP Cache Enumeration,no
+T1018,posh_ps_potential_unconstrained_delegation_discovery.yml,NetBIOS Name Scan (NBTscan),no
+T1018,posh_ps_potential_unconstrained_delegation_discovery.yml,DNS Cache/Query Enumeration,no
+T1018,posh_ps_potential_unconstrained_delegation_discovery.yml,WMI Computer Enumeration,no
+T1057,posh_ps_susp_get_process.yml,Command-line utility process enumeration,no
+T1057,posh_ps_susp_get_process.yml,Native API process enumeration,no
+T1057,posh_ps_susp_get_process.yml,WMI process enumeration,no
+T1057,posh_ps_susp_get_process.yml,PowerShell process enumeration,no
+T1543.003,proc_creation_win_devcon_disable_vmci_driver.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_devcon_disable_vmci_driver.yml,Modify Existing Service,yes
+T1082,proc_creation_win_discovery_via_reg_queries.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_discovery_via_reg_queries.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_discovery_via_reg_queries.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_discovery_via_reg_queries.yml,Environment Variable Enumeration System Information Discovery,yes
+T1082,proc_creation_win_dtrace_kernel_dump.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_dtrace_kernel_dump.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_dtrace_kernel_dump.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_dtrace_kernel_dump.yml,Environment Variable Enumeration System Information Discovery,yes
+T1057,proc_creation_win_findstr_recon_pipe_output.yml,Command-line utility process enumeration,yes
+T1057,proc_creation_win_findstr_recon_pipe_output.yml,Native API process enumeration,no
+T1057,proc_creation_win_findstr_recon_pipe_output.yml,WMI process enumeration,no
+T1057,proc_creation_win_findstr_recon_pipe_output.yml,PowerShell process enumeration,no
+T1018,proc_creation_win_hktl_netexec.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_hktl_netexec.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_hktl_netexec.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_hktl_netexec.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_hktl_netexec.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_hktl_netexec.yml,WMI Computer Enumeration,yes
+T1082,proc_creation_win_hktl_pchunter.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_hktl_pchunter.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_hktl_pchunter.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_hktl_pchunter.yml,Environment Variable Enumeration System Information Discovery,yes
+T1057,proc_creation_win_hktl_pchunter.yml,Command-line utility process enumeration,yes
+T1057,proc_creation_win_hktl_pchunter.yml,Native API process enumeration,no
+T1057,proc_creation_win_hktl_pchunter.yml,WMI process enumeration,no
+T1057,proc_creation_win_hktl_pchunter.yml,PowerShell process enumeration,no
+T1053.005,proc_creation_win_hktl_powersploit_empire_default_schtasks.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_hktl_powersploit_empire_default_schtasks.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_hktl_powersploit_empire_default_schtasks.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_hktl_powersploit_empire_default_schtasks.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1082,proc_creation_win_hktl_winpeas.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_hktl_winpeas.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_hktl_winpeas.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_hktl_winpeas.yml,Environment Variable Enumeration System Information Discovery,yes
+T1082,proc_creation_win_hktl_winpwn.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_hktl_winpwn.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_hktl_winpwn.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_hktl_winpwn.yml,Environment Variable Enumeration System Information Discovery,yes
+T1082,proc_creation_win_hostname_execution.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_hostname_execution.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_hostname_execution.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_hostname_execution.yml,Environment Variable Enumeration System Information Discovery,yes
+T1018,proc_creation_win_net_view_share_and_sessions_enum.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_net_view_share_and_sessions_enum.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_net_view_share_and_sessions_enum.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_net_view_share_and_sessions_enum.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_net_view_share_and_sessions_enum.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_net_view_share_and_sessions_enum.yml,WMI Computer Enumeration,yes
+T1016,proc_creation_win_netsh_fw_rules_discovery.yml,OS Command Network Configuration Discovery,yes
+T1016,proc_creation_win_netsh_fw_rules_discovery.yml,System API Network Configuration Discovery,no
+T1016,proc_creation_win_netsh_fw_rules_discovery.yml,External Service Public IP Discovery,no
+T1016,proc_creation_win_netsh_fw_rules_discovery.yml,Registry Proxy Configuration Discovery,no
+T1016,proc_creation_win_nltest_execution.yml,OS Command Network Configuration Discovery,yes
+T1016,proc_creation_win_nltest_execution.yml,System API Network Configuration Discovery,no
+T1016,proc_creation_win_nltest_execution.yml,External Service Public IP Discovery,no
+T1016,proc_creation_win_nltest_execution.yml,Registry Proxy Configuration Discovery,no
+T1018,proc_creation_win_nltest_execution.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_nltest_execution.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_nltest_execution.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_nltest_execution.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_nltest_execution.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_nltest_execution.yml,WMI Computer Enumeration,yes
+T1016,proc_creation_win_nltest_recon.yml,OS Command Network Configuration Discovery,yes
+T1016,proc_creation_win_nltest_recon.yml,System API Network Configuration Discovery,no
+T1016,proc_creation_win_nltest_recon.yml,External Service Public IP Discovery,no
+T1016,proc_creation_win_nltest_recon.yml,Registry Proxy Configuration Discovery,no
+T1082,proc_creation_win_nslookup_domain_discovery.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_nslookup_domain_discovery.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_nslookup_domain_discovery.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_nslookup_domain_discovery.yml,Environment Variable Enumeration System Information Discovery,yes
+T1543.003,proc_creation_win_powershell_create_service.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_powershell_create_service.yml,Modify Existing Service,yes
+T1543.003,proc_creation_win_powershell_service_dacl_modification_set_service.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_powershell_service_dacl_modification_set_service.yml,Modify Existing Service,yes
+T1018,proc_creation_win_pua_adfind_susp_usage.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_pua_adfind_susp_usage.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_pua_adfind_susp_usage.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_pua_adfind_susp_usage.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_pua_adfind_susp_usage.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_pua_adfind_susp_usage.yml,WMI Computer Enumeration,yes
+T1543.003,proc_creation_win_pua_kdu_driver_tool.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_pua_kdu_driver_tool.yml,Modify Existing Service,yes
+T1082,proc_creation_win_pua_system_informer.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_pua_system_informer.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_pua_system_informer.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_pua_system_informer.yml,Environment Variable Enumeration System Information Discovery,yes
+T1018,proc_creation_win_python_adidnsdump.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_python_adidnsdump.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_python_adidnsdump.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_python_adidnsdump.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_python_adidnsdump.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_python_adidnsdump.yml,WMI Computer Enumeration,yes
+T1082,proc_creation_win_reg_machineguid.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_reg_machineguid.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_reg_machineguid.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_reg_machineguid.yml,Environment Variable Enumeration System Information Discovery,yes
+T1018,proc_creation_win_renamed_adfind.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_renamed_adfind.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_renamed_adfind.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_renamed_adfind.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_renamed_adfind.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_renamed_adfind.yml,WMI Computer Enumeration,yes
+T1053.005,proc_creation_win_renamed_schtasks_execution.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_renamed_schtasks_execution.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_renamed_schtasks_execution.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_renamed_schtasks_execution.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1543.003,proc_creation_win_sc_create_service.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_sc_create_service.yml,Modify Existing Service,yes
+T1543.003,proc_creation_win_sc_new_kernel_driver.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_sc_new_kernel_driver.yml,Modify Existing Service,yes
+T1543.003,proc_creation_win_sc_sdset_allow_service_changes.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_sc_sdset_allow_service_changes.yml,Modify Existing Service,yes
+T1543.003,proc_creation_win_sc_sdset_deny_service_access.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_sc_sdset_deny_service_access.yml,Modify Existing Service,yes
+T1543.003,proc_creation_win_sc_service_path_modification.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_sc_service_path_modification.yml,Modify Existing Service,yes
+T1543.003,proc_creation_win_sc_service_tamper_for_persistence.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_sc_service_tamper_for_persistence.yml,Modify Existing Service,yes
+T1053.005,proc_creation_win_schtasks_appdata_local_system.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_appdata_local_system.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_appdata_local_system.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_appdata_local_system.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_change.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_change.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_change.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_change.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_creation.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_creation.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_creation.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_creation.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_creation_temp_folder.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_creation_temp_folder.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_creation_temp_folder.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_creation_temp_folder.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_curl_and_powershell_combo.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_curl_and_powershell_combo.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_curl_and_powershell_combo.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_curl_and_powershell_combo.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_env_folder.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_env_folder.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_env_folder.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_env_folder.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_folder_combos.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_folder_combos.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_folder_combos.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_folder_combos.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_guid_task_name.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_guid_task_name.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_guid_task_name.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_guid_task_name.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_one_time_only_midnight_task.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_one_time_only_midnight_task.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_one_time_only_midnight_task.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_one_time_only_midnight_task.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_openssh_tunnelling.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_openssh_tunnelling.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_openssh_tunnelling.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_openssh_tunnelling.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_persistence_windows_telemetry.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_persistence_windows_telemetry.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_persistence_windows_telemetry.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_persistence_windows_telemetry.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_powershell_persistence.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_powershell_persistence.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_powershell_persistence.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_powershell_persistence.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_reg_loader.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_reg_loader.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_reg_loader.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_reg_loader.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_reg_loader_encoded.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_reg_loader_encoded.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_reg_loader_encoded.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_reg_loader_encoded.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_schedule_type.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_schedule_type.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_schedule_type.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_schedule_type.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_schedule_type_system.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_schedule_type_system.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_schedule_type_system.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_schedule_type_system.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_schedule_via_masqueraded_xml_file.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_schedule_via_masqueraded_xml_file.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_schedule_via_masqueraded_xml_file.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_schedule_via_masqueraded_xml_file.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_susp_pattern.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_susp_pattern.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_susp_pattern.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_susp_pattern.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_system.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_system.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_system.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_system.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1053.005,proc_creation_win_schtasks_system_process.yml,Scheduled task creation via schtasks CLI,yes
+T1053.005,proc_creation_win_schtasks_system_process.yml,Scheduled task creation via PowerShell CIM,yes
+T1053.005,proc_creation_win_schtasks_system_process.yml,Hidden scheduled task creation,yes
+T1053.005,proc_creation_win_schtasks_system_process.yml,Create scheduled task via GhostTask registry manipulation,yes
+T1082,proc_creation_win_secedit_execution.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_secedit_execution.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_secedit_execution.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_secedit_execution.yml,Environment Variable Enumeration System Information Discovery,yes
+T1016,proc_creation_win_susp_network_command.yml,OS Command Network Configuration Discovery,yes
+T1016,proc_creation_win_susp_network_command.yml,System API Network Configuration Discovery,no
+T1016,proc_creation_win_susp_network_command.yml,External Service Public IP Discovery,no
+T1016,proc_creation_win_susp_network_command.yml,Registry Proxy Configuration Discovery,no
+T1018,proc_creation_win_susp_network_scan_loop.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_susp_network_scan_loop.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_susp_network_scan_loop.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_susp_network_scan_loop.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_susp_network_scan_loop.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_susp_network_scan_loop.yml,WMI Computer Enumeration,yes
+T1543.003,proc_creation_win_susp_service_creation.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_susp_service_creation.yml,Modify Existing Service,yes
+T1543.003,proc_creation_win_sysinternals_psservice.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_sysinternals_psservice.yml,Modify Existing Service,yes
+T1543.003,proc_creation_win_sysinternals_pssuspend_execution.yml,Create New Windows Service,no
+T1543.003,proc_creation_win_sysinternals_pssuspend_execution.yml,Modify Existing Service,yes
+T1082,proc_creation_win_systeminfo_execution.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_systeminfo_execution.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_systeminfo_execution.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_systeminfo_execution.yml,Environment Variable Enumeration System Information Discovery,yes
+T1018,proc_creation_win_webshell_chopper.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_webshell_chopper.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_webshell_chopper.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_webshell_chopper.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_webshell_chopper.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_webshell_chopper.yml,WMI Computer Enumeration,yes
+T1018,proc_creation_win_webshell_hacking.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_webshell_hacking.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_webshell_hacking.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_webshell_hacking.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_webshell_hacking.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_webshell_hacking.yml,WMI Computer Enumeration,yes
+T1018,proc_creation_win_webshell_recon_commands_and_processes.yml,ICMP Ping Sweep Discovery,yes
+T1018,proc_creation_win_webshell_recon_commands_and_processes.yml,Net Command SMB Enumeration,yes
+T1018,proc_creation_win_webshell_recon_commands_and_processes.yml,ARP Cache Enumeration,yes
+T1018,proc_creation_win_webshell_recon_commands_and_processes.yml,NetBIOS Name Scan (NBTscan),yes
+T1018,proc_creation_win_webshell_recon_commands_and_processes.yml,DNS Cache/Query Enumeration,yes
+T1018,proc_creation_win_webshell_recon_commands_and_processes.yml,WMI Computer Enumeration,yes
+T1057,proc_creation_win_wmic_recon_process.yml,Command-line utility process enumeration,yes
+T1057,proc_creation_win_wmic_recon_process.yml,Native API process enumeration,no
+T1057,proc_creation_win_wmic_recon_process.yml,WMI process enumeration,no
+T1057,proc_creation_win_wmic_recon_process.yml,PowerShell process enumeration,no
+T1082,proc_creation_win_wmic_recon_product_class.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_wmic_recon_product_class.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_wmic_recon_product_class.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_wmic_recon_product_class.yml,Environment Variable Enumeration System Information Discovery,yes
+T1082,proc_creation_win_wmic_recon_system_info_uncommon.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_wmic_recon_system_info_uncommon.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_wmic_recon_system_info_uncommon.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_wmic_recon_system_info_uncommon.yml,Environment Variable Enumeration System Information Discovery,yes
+T1082,proc_creation_win_wmic_recon_volume.yml,Native OS Command System Information Discovery,yes
+T1082,proc_creation_win_wmic_recon_volume.yml,Registry Query System Information Discovery,no
+T1082,proc_creation_win_wmic_recon_volume.yml,WMI/PowerShell Query System Information Discovery,yes
+T1082,proc_creation_win_wmic_recon_volume.yml,Environment Variable Enumeration System Information Discovery,yes
+T1543.003,registry_set_cobaltstrike_service_installs.yml,Create New Windows Service,no
+T1543.003,registry_set_cobaltstrike_service_installs.yml,Modify Existing Service,yes
+T1543.003,registry_set_servicedll_hijack.yml,Create New Windows Service,no
+T1543.003,registry_set_servicedll_hijack.yml,Modify Existing Service,yes
+T1053.005,registry_set_taskcache_entry.yml,Scheduled task creation via schtasks CLI,no
+T1053.005,registry_set_taskcache_entry.yml,Scheduled task creation via PowerShell CIM,no
+T1053.005,registry_set_taskcache_entry.yml,Hidden scheduled task creation,yes
+T1053.005,registry_set_taskcache_entry.yml,Create scheduled task via GhostTask registry manipulation,no
+T1053.005,registry_set_telemetry_persistence.yml,Scheduled task creation via schtasks CLI,no
+T1053.005,registry_set_telemetry_persistence.yml,Scheduled task creation via PowerShell CIM,no
+T1053.005,registry_set_telemetry_persistence.yml,Hidden scheduled task creation,yes
+T1053.005,registry_set_telemetry_persistence.yml,Create scheduled task via GhostTask registry manipulation,no
