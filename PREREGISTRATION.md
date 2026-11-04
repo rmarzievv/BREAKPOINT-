@@ -48,7 +48,7 @@ All SigmaHQ rules under `rules/windows/` tagged with a pilot technique at the pi
 
 ## 4. Procedure
 
-1. Each implementation is executed **n = 3 times** on PVLAB from a clean snapshot.
+1. Each implementation is executed **n = 3 times** in a Hyper-V Windows 11 VM on PVLAB, reverted to the same clean checkpoint before every execution.
 2. An **oracle** verifies the effect (output obtained, task created, service created/modified). Outcome: `success`, `fail`, or `blocked` (blocked by Defender).
 3. Executions with a non-`success` outcome are excluded from coverage calculation, counted separately, and used in RQ3 (executability).
 4. Events are linked to an execution via Sysmon `ProcessGuid`, the process tree rooted at the harness, and a time window. **No command-line markers are used.**
@@ -78,7 +78,7 @@ All SigmaHQ rules under `rules/windows/` tagged with a pilot technique at the pi
 |---|---|
 | summiting-the-pyramid (`stp3`) | `13f15f4bccc8e33510f281406eb59b542fd34b24` |
 | SigmaHQ | `05d1031f537e830b76da53bae2400c5814c89165` |
-| Windows 11 (PVLAB) | <build> |
+| Windows 11 (Hyper-V VM on PVLAB) | <build>, checkpoint name <name> |
 | Sysmon | <version> + config <source, commit> |
 | pySigma + backend | <versions> |
 | Control engine | <version> |
@@ -91,4 +91,4 @@ All SigmaHQ rules under `rules/windows/` tagged with a pilot technique at the pi
 
 ## 9. Known threats to validity
 
-Single host, single build, single Sysmon config; catalog bias is inherited by the sample; pySigma semantics ≠ a production SIEM; the manual baseline is labelled by the author (mitigation: labelled before the run and published in full).
+Single host, single build, single Sysmon config; commands are launched by the harness, so `ParentImage` is `python.exe` (13 of 104 pilot rules reference a parent-process field; their results are reported separately); catalog bias is inherited by the sample; pySigma semantics ≠ a production SIEM; the manual baseline is labelled by the author (mitigation: labelled before the run and published in full).
