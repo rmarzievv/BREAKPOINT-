@@ -18,6 +18,7 @@ A hypothesis is **supported** only if its criterion is met. Otherwise it is **no
 | ID | Hypothesis | Support criterion |
 |---|---|---|
 | H1 | DCC systematically **overestimates** implementation coverage, because it credits coverage on matching ATT&CK tag + data component without checking rule conditions | Precision of DCC "covered" claims at the rule × implementation cell level < 0.5, with the upper bound of the 95% bootstrap CI < 0.7 |
+| H1c | DCC also **underestimates**: it marks implementations as not covered although a rule detects them in execution (e.g. the rule's data component is not mapped to any catalog step) | Recall of DCC claims (detected cells that DCC marked covered / all detected cells) < 0.7, with the upper bound of the 95% bootstrap CI < 0.85 |
 | H1b | The overestimate persists against a manual analytic baseline (tag + data component + field-value review) | DCC precision is lower than manual-baseline precision by > 0.2, Wilcoxon p < 0.05 across techniques |
 | H2 | Some LLM-catalog entries are not executable on an in-scope Windows host, duplicate other entries, or predict a data component absent from the telemetry | ≥ 20% of sampled entries fall into at least one of the three defect categories |
 | H3 | Process-creation rules cover implementations that spawn a new process better than implementations via API, WMI or PowerShell inside an already-running process | Measured coverage is higher in the first group by > 0.2 |

@@ -1,0 +1,11 @@
+# Known true values for the oracles. Copy to harness/lab.yaml on PVLAB and fill in.
+# These are the same values pinned in PREREGISTRATION §7.
+computername: PVLAB
+lab_build: "26100"           # (Get-CimInstance Win32_OperatingSystem).BuildNumber
+lab_ip: 192.168.1.50         # PVLAB IPv4 on the lab network
+gateway_ip: 192.168.1.1
+subnet: 192.168.1            # first three octets
+sweep_start: "1"
+sweep_end: "20"
+dns_probe_name: example.com  # resolved during setup of the DNS cache implementation
+repetitions: 3

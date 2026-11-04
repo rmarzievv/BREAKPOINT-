@@ -1,0 +1,313 @@
+# Executable spec for every included pilot implementation.
+# Human-readable version: ORACLES.md. Names must match data/pilot_implementations.csv.
+#
+# Fields
+#   id              short unique id (used in results and event linking)
+#   technique       ATT&CK ID
+#   implementation  exact name from pilot_implementations.csv
+#   shell           cmd | powershell | exe   (exe = run the binary directly, no shell)
+#   command         what is executed and measured
+#   setup/cleanup   commands run before/after, NOT part of the measured execution
+#   requires        user | admin | system
+#   success         oracle checks, all must pass (see oracle.py)
+#
+# {placeholders} come from harness/lab.yaml (known true values) and the run (marker_pid).
+
+# ---------------- T1082 System Information Discovery ----------------
+- id: t1082-reg
+  technique: T1082
+  implementation: Registry Query System Information Discovery
+  shell: cmd
+  command: reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild
+  requires: user
+  success:
+    - exit_code: 0
+    - regex_group_equals: {pattern: 'CurrentBuild\s+REG_SZ\s+(?P<v>\d+)', equals: '{lab_build}'}
+
+- id: t1082-systeminfo
+  technique: T1082
+  implementation: Native OS Command System Information Discovery
+  shell: cmd
+  command: systeminfo
+  requires: user
+  success:
+    - exit_code: 0
+    - contains: '{computername}'
+
+- id: t1082-cim
+  technique: T1082
+  implementation: WMI/PowerShell Query System Information Discovery
+  shell: powershell
+  command: (Get-CimInstance Win32_OperatingSystem).BuildNumber
+  requires: user
+  success:
+    - exit_code: 0
+    - stdout_equals: '{lab_build}'
+
+- id: t1082-env
+  technique: T1082
+  implementation: Environment Variable Enumeration System Information Discovery
+  shell: cmd
+  command: set
+  requires: user
+  success:
+    - exit_code: 0
+    - contains: 'COMPUTERNAME={computername}'
+    - contains: 'PROCESSOR_ARCHITECTURE='
+
+# ---------------- T1057 Process Discovery ----------------
+# The harness starts a marker process (notepad.exe) before each T1057 run; its PID is {marker_pid}.
+- id: t1057-tasklist
+  technique: T1057
+  implementation: Command-line utility process enumeration
+  shell: cmd
+  command: tasklist /fo csv
+  requires: user
+  marker: true
+  success:
+    - exit_code: 0
+    - contains: '"{marker_pid}"'
+
+- id: t1057-wmic
+  technique: T1057
+  implementation: WMI process enumeration
+  shell: cmd
+  command: wmic process get ProcessId,Name /format:csv
+  requires: user
+  marker: true
+  success:
+    - exit_code: 0
+    - regex: ',{marker_pid}\s*$'
+
+- id: t1057-getprocess
+  technique: T1057
+  implementation: PowerShell process enumeration
+  shell: powershell
+  command: Get-Process | Select-Object -ExpandProperty Id
+  requires: user
+  marker: true
+  success:
+    - exit_code: 0
+    - regex: '^\s*{marker_pid}\s*$'
+
+- id: t1057-api-c
+  technique: T1057
+  implementation: Native API process enumeration
+  shell: exe
+  command: C:\BPLab\bin\enumproc.exe
+  requires: user
+  marker: true
+  success:
+    - exit_code: 0
+    - regex: '^\s*{marker_pid}\b'
+
+- id: t1057-api-ps
+  technique: T1057
+  implementation: Native API process enumeration via PowerShell P/Invoke
+  shell: powershell
+  command: . C:\BPLab\bin\enumproc.ps1
+  requires: user
+  marker: true
+  success:
+    - exit_code: 0
+    - regex: '^\s*{marker_pid}\b'
+
+# ---------------- T1018 Remote System Discovery ----------------
+- id: t1018-arp
+  technique: T1018
+  implementation: ARP Cache Enumeration
+  shell: cmd
+  command: arp -a
+  requires: user
+  setup: [{shell: cmd, command: 'ping -n 1 {gateway_ip}'}]   # make sure the gateway is in the cache
+  success:
+    - exit_code: 0
+    - regex: '{gateway_ip_re}\s+([0-9a-f]{2}-){5}[0-9a-f]{2}'
+
+- id: t1018-getnetneighbor
+  technique: T1018
+  implementation: ARP cache via PowerShell Get-NetNeighbor
+  shell: powershell
+  command: Get-NetNeighbor -AddressFamily IPv4 | Select-Object IPAddress,LinkLayerAddress | Format-Table -HideTableHeaders
+  requires: user
+  setup: [{shell: cmd, command: 'ping -n 1 {gateway_ip}'}]
+  success:
+    - exit_code: 0
+    - contains: '{gateway_ip}'
+
+- id: t1018-pingsweep
+  technique: T1018
+  implementation: ICMP Ping Sweep Discovery
+  shell: cmd
+  command: for /L %i in ({sweep_start},1,{sweep_end}) do @ping -n 1 -w 200 {subnet}.%i
+  requires: user
+  success:
+    - regex: 'Reply from {gateway_ip_re}:'
+
+- id: t1018-netview
+  technique: T1018
+  implementation: Net Command SMB Enumeration
+  shell: cmd
+  command: net view
+  requires: user
+  success:
+    - exit_code: 0
+    - regex: '^\\\\\S+'
+
+- id: t1018-nbtscan
+  technique: T1018
+  implementation: NetBIOS Name Scan (NBTscan)
+  shell: exe
+  command: C:\BPLab\bin\nbtscan.exe {subnet}.0/24
+  requires: user
+  success:
+    - exit_code: 0
+    - regex: '^{subnet_re}\.\d+\s+\S+'
+
+- id: t1018-dnscache
+  technique: T1018
+  implementation: DNS Cache/Query Enumeration
+  shell: cmd
+  command: ipconfig /displaydns
+  requires: user
+  setup: [{shell: cmd, command: 'nslookup {dns_probe_name}'}]
+  success:
+    - exit_code: 0
+    - contains: '{dns_probe_name}'
+
+- id: t1018-wmi
+  technique: T1018
+  implementation: WMI Computer Enumeration
+  shell: powershell
+  command: (Get-CimInstance Win32_ComputerSystem).Name
+  requires: user
+  success:
+    - exit_code: 0
+    - stdout_equals: '{computername}'
+
+# ---------------- T1016 System Network Configuration Discovery ----------------
+- id: t1016-ipconfig
+  technique: T1016
+  implementation: OS Command Network Configuration Discovery
+  shell: cmd
+  command: ipconfig /all
+  requires: user
+  success:
+    - exit_code: 0
+    - contains: '{lab_ip}'
+
+- id: t1016-api-c
+  technique: T1016
+  implementation: System API Network Configuration Discovery
+  shell: exe
+  command: C:\BPLab\bin\netcfg.exe
+  requires: user
+  success:
+    - exit_code: 0
+    - contains: '{lab_ip}'
+
+- id: t1016-api-ps
+  technique: T1016
+  implementation: System API network configuration via PowerShell P/Invoke
+  shell: powershell
+  command: . C:\BPLab\bin\netcfg.ps1
+  requires: user
+  success:
+    - exit_code: 0
+    - contains: '{lab_ip}'
+
+- id: t1016-publicip
+  technique: T1016
+  implementation: External Service Public IP Discovery
+  shell: powershell
+  command: Invoke-RestMethod https://api.ipify.org
+  requires: user
+  success:
+    - exit_code: 0
+    - public_ipv4: true
+
+- id: t1016-proxyreg
+  technique: T1016
+  implementation: Registry Proxy Configuration Discovery
+  shell: cmd
+  command: reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable
+  requires: user
+  success:
+    - exit_code: 0
+    - regex: 'ProxyEnable\s+REG_DWORD\s+0x[0-9a-f]+'
+
+# ---------------- T1053.005 Scheduled Task ----------------
+- id: t1053-schtasks
+  technique: T1053.005
+  implementation: Scheduled task creation via schtasks CLI
+  shell: cmd
+  command: schtasks /create /tn BPTestCli /tr "cmd /c echo bp > C:\BPLab\task_ran.txt" /sc once /st 23:59 /f
+  requires: admin
+  success:
+    - exit_code: 0
+    - command_succeeds: {shell: cmd, command: 'schtasks /query /tn BPTestCli'}
+  cleanup: [{shell: cmd, command: 'schtasks /delete /tn BPTestCli /f'}]
+
+- id: t1053-cim
+  technique: T1053.005
+  implementation: Scheduled task creation via PowerShell CIM
+  shell: powershell
+  command: >-
+    Register-ScheduledTask -TaskName BPTestCim
+    -Action (New-ScheduledTaskAction -Execute cmd.exe -Argument '/c echo bp > C:\BPLab\task_ran.txt')
+    -Trigger (New-ScheduledTaskTrigger -Once -At 23:59) | Out-Null
+  requires: admin
+  success:
+    - exit_code: 0
+    - command_succeeds: {shell: powershell, command: 'Get-ScheduledTask -TaskName BPTestCim -ErrorAction Stop | Out-Null'}
+  cleanup: [{shell: powershell, command: 'Unregister-ScheduledTask BPTestCim -Confirm:$false'}]
+
+- id: t1053-hidden
+  technique: T1053.005
+  implementation: Hidden scheduled task creation
+  shell: cmd
+  command: reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestHidden" /v SD /f
+  requires: system
+  setup: [{shell: cmd, command: 'schtasks /create /tn BPTestHidden /tr "cmd /c echo bp > C:\BPLab\task_ran.txt" /sc once /st 23:59 /f'}]
+  success:
+    - exit_code: 0
+    - command_succeeds: {shell: cmd, command: 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestHidden"'}
+    - command_fails: {shell: cmd, command: 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestHidden" /v SD'}
+    - command_fails: {shell: cmd, command: 'schtasks /query /tn BPTestHidden'}
+  cleanup: [{shell: powershell, command: '. C:\BPLab\bin\cleanup_task.ps1 BPTestHidden'}]
+
+- id: t1053-ghosttask
+  technique: T1053.005
+  implementation: Create scheduled task via GhostTask registry manipulation
+  shell: exe
+  command: C:\BPLab\bin\GhostTask.exe localhost add BPTestGhost "cmd.exe" "/c echo bp > C:\BPLab\task_ran.txt" SYSTEM daily 23:59
+  requires: system
+  success:
+    - exit_code: 0
+    - command_succeeds: {shell: cmd, command: 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestGhost"'}
+  cleanup: [{shell: powershell, command: '. C:\BPLab\bin\cleanup_task.ps1 BPTestGhost'}]
+
+# ---------------- T1543.003 Windows Service ----------------
+- id: t1543-create
+  technique: T1543.003
+  implementation: Create New Windows Service
+  shell: cmd
+  command: sc create BPTestSvc binPath= "C:\BPLab\bin\bpsvc.exe" start= demand
+  requires: admin
+  success:
+    - exit_code: 0
+    - command_succeeds: {shell: cmd, command: 'sc query BPTestSvc'}
+    - command_succeeds: {shell: cmd, command: 'reg query "HKLM\SYSTEM\CurrentControlSet\Services\BPTestSvc"'}
+  cleanup: [{shell: cmd, command: 'sc delete BPTestSvc'}]
+
+- id: t1543-modify
+  technique: T1543.003
+  implementation: Modify Existing Service
+  shell: cmd
+  command: sc config BPTestSvcMod binPath= "C:\BPLab\bin\bpsvc2.exe"
+  requires: admin
+  setup: [{shell: cmd, command: 'sc create BPTestSvcMod binPath= "C:\BPLab\bin\bpsvc.exe" start= demand'}]
+  success:
+    - exit_code: 0
+    - command_stdout_contains: {shell: cmd, command: 'reg query "HKLM\SYSTEM\CurrentControlSet\Services\BPTestSvcMod" /v ImagePath', contains: 'bpsvc2.exe'}
+  cleanup: [{shell: cmd, command: 'sc delete BPTestSvcMod'}]

@@ -37,7 +37,7 @@ DCC credits a rule with covering an implementation when the rule's ATT&CK tag an
 ## Reproduce
 
 ```bash
-git clone --recursive https://github.com/rmarzievv/breakpoint.git && cd breakpoint
+git clone --recursive https://github.com/rmarzievv/BREAKPOINT-.git && cd breakpoint
 python -m venv .venv && source .venv/bin/activate
 make setup
 make            # fetch pinned inputs, rebuild data/, run tests

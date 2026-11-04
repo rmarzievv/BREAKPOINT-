@@ -65,6 +65,8 @@ DECISIONS: dict[tuple[str, str], tuple[str, str, str, str]] = {
 # Implementations not in the catalog (source=manual); excluded from RQ2-RQ3.
 MANUAL = [
     ("T1018", "ARP cache via PowerShell Get-NetNeighbor", "no new process; CIM provider inside powershell.exe"),
+    ("T1057", "Native API process enumeration via PowerShell P/Invoke", "variant B of catalog entry; API called inside powershell.exe"),
+    ("T1016", "System API network configuration via PowerShell P/Invoke", "variant B of catalog entry; API called inside powershell.exe"),
 ]
 
 FIELDS = ["technique_id", "implementation", "source", "status", "reason_code", "duplicate_of", "note"]

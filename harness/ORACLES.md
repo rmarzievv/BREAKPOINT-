@@ -62,7 +62,7 @@ Command:
 Success:
 - exit code 0
 - output contains the marker PID
-Note: wmic is removed on recent Windows 11 builds. If missing → fail, recorded for RQ3.
+Note: wmic is removed by default on recent Windows 11 builds but still common on Windows 10 hosts. If missing on PVLAB, install the WMIC optional feature and record it in PREREGISTRATION §7.
 
 ### PowerShell process enumeration
 Command:
@@ -72,9 +72,15 @@ Success:
 - output contains the marker PID
 
 ### Native API process enumeration
-Command:
-    C:\BPLab\bin\enumproc.exe   (small C program: CreateToolhelp32Snapshot + Process32First/Next)
-Success:
+Two variants, same API, different telemetry (tests H3):
+
+Variant A — compiled C (catalog):
+    C:\BPLab\bin\enumproc.exe   (CreateToolhelp32Snapshot + Process32First/Next)
+
+Variant B — PowerShell P/Invoke (manual):
+    powershell -c "Add-Type ... CreateToolhelp32Snapshot ..."   (no new binary, API called inside powershell.exe)
+
+Success (both):
 - exit code 0
 - output contains the marker PID
 
@@ -145,9 +151,15 @@ Success:
 - output contains the lab host IP
 
 ### System API Network Configuration Discovery
-Command:
-    C:\BPLab\bin\netcfg.exe   (small C program: GetAdaptersAddresses)
-Success:
+Two variants, same API, different telemetry (tests H3):
+
+Variant A — compiled C (catalog):
+    C:\BPLab\bin\netcfg.exe   (GetAdaptersAddresses)
+
+Variant B — PowerShell P/Invoke (manual):
+    powershell -c "Add-Type ... GetAdaptersAddresses ..."
+
+Success (both):
 - exit code 0
 - output contains the lab host IP
 

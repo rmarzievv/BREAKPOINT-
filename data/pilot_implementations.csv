@@ -38,3 +38,5 @@ T1016,Network Device CLI Discovery,catalog,exclude,E1,,"network device, not Wind
 T1016,Registry Proxy Configuration Discovery,catalog,include,,,
 T1543.003,Remote Windows Service Creation,catalog,exclude,E2,,requires remote host; also near-duplicate of Remote Service Creation
 T1018,ARP cache via PowerShell Get-NetNeighbor,manual,include,,,no new process; CIM provider inside powershell.exe
+T1057,Native API process enumeration via PowerShell P/Invoke,manual,include,,,variant B of catalog entry; API called inside powershell.exe
+T1016,System API network configuration via PowerShell P/Invoke,manual,include,,,variant B of catalog entry; API called inside powershell.exe
