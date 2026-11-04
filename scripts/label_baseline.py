@@ -20,6 +20,7 @@ PATH = ROOT / "data" / "manual_baseline.csv"
 
 
 def main() -> int:
+    csv.field_size_limit(sys.maxsize)
     with PATH.open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
         fields = list(rows[0].keys())
@@ -38,7 +39,8 @@ def main() -> int:
         print(f"[{n}/{len(groups)}] {tech}  {first['rule_title']}")
         print(f"file:      {rule_file}")
         print(f"logsource: {first['logsource']}")
-        print(f"detection: {first['detection']}\n")
+        det = first["detection"]
+        print(f"detection: {det[:1500]}{' ...[truncated]' if len(det) > 1500 else ''}\n")
         for i, r in enumerate(group, start=1):
             src = "  (manual)" if r["implementation_source"] == "manual" else ""
             print(f"  {i}. {r['implementation']}{src}")
