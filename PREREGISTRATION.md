@@ -19,7 +19,7 @@ A hypothesis is **supported** only if its criterion is met. Otherwise it is **no
 |---|---|---|
 | H1 | DCC systematically **overestimates** implementation coverage, because it credits coverage on matching ATT&CK tag + data component without checking rule conditions | Precision of DCC "covered" claims at the rule × implementation cell level < 0.5, with the upper bound of the 95% bootstrap CI < 0.7 |
 | H1c | DCC also **underestimates**: it marks implementations as not covered although a rule detects them in execution (e.g. the rule's data component is not mapped to any catalog step) | Recall of DCC claims (detected cells that DCC marked covered / all detected cells) < 0.7, with the upper bound of the 95% bootstrap CI < 0.85 |
-| H1b | The overestimate persists against a manual analytic baseline (tag + data component + field-value review) | DCC precision is lower than manual-baseline precision by > 0.2, Wilcoxon p < 0.05 across techniques |
+| H1b | The overestimate persists against a predicted-telemetry baseline (rules run over the events an analyst expects each implementation to produce) | DCC precision is lower than predicted-baseline precision by > 0.2, Wilcoxon p < 0.05 across techniques |
 | H2 | Some LLM-catalog entries are not executable on an in-scope Windows host, duplicate other entries, or predict a data component absent from the telemetry | ≥ 20% of sampled entries fall into at least one of the three defect categories |
 | H3 | Process-creation rules cover implementations that spawn a new process better than implementations via API, WMI or PowerShell inside an already-running process | Measured coverage is higher in the first group by > 0.2 |
 
@@ -58,13 +58,13 @@ All SigmaHQ rules under `rules/windows/` tagged with a pilot technique at the pi
 
 - **Detected (rule × implementation cell):** the rule fires on at least one event linked to a successful execution of the implementation, in at least 2 of 3 repetitions.
 - **DCC "covered" claim:** `Implementation Covered = yes` in the `Implementation Coverage` sheet, with the rule listed in that implementation's `Analytic Files`.
-- **Manual baseline:** the analyst (author) decides "should detect / should not" from the rule text and the implementation description, **before** seeing execution results. Decisions are committed to `data/manual_baseline.csv` before the run.
+- **Predicted-telemetry baseline:** for each implementation, the events an analyst expects it to produce (process creation, PowerShell script block, and side effects in `harness/expected_extra.yaml`) are written down before execution; every rule of the matching logsource is evaluated over them (`scripts/predicted_baseline.py`). Result: `data/predicted_baseline.csv`, committed before the run. Replaces manual per-cell labelling (reproducible, no author-labelling bias). The gap between expected and observed telemetry is reported as a result.
 - **Technique implementation coverage:** fraction of included implementations detected by at least one rule.
 
 ## 6. Metrics and statistics
 
 - Confusion matrix of DCC claims vs. measurement; precision, recall.
-- Same for the manual baseline.
+- Same for the predicted-telemetry baseline.
 - Coverage per rule and per technique.
 - Fraction of defective catalog entries by category (RQ3).
 - Engine disagreement: number of cells where verdicts differ.
@@ -91,4 +91,4 @@ All SigmaHQ rules under `rules/windows/` tagged with a pilot technique at the pi
 
 ## 9. Known threats to validity
 
-Single host, single build, single Sysmon config; commands are launched by the harness, so `ParentImage` is `python.exe` (13 of 104 pilot rules reference a parent-process field; their results are reported separately); catalog bias is inherited by the sample; pySigma semantics ≠ a production SIEM; the manual baseline is labelled by the author (mitigation: labelled before the run and published in full).
+Single host, single build, single Sysmon config; commands are launched by the harness, so `ParentImage` is `python.exe` (13 of 104 pilot rules reference a parent-process field; their results are reported separately); catalog bias is inherited by the sample; pySigma semantics ≠ a production SIEM; expected events are written by the author (mitigation: written before the run, reviewable as data/expected_events.jsonl, published in full).

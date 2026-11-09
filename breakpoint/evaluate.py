@@ -19,9 +19,31 @@ _DAC_SCRIPTS = ROOT / "vendor" / "detection-as-code" / "scripts"
 if str(_DAC_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_DAC_SCRIPTS))
 
-from dac import Rule, matches  # noqa: E402
+import re  # noqa: E402
+import sqlite3  # noqa: E402
+
+from dac import Rule, _detection_fields, sqliteBackend  # noqa: E402
 
 __all__ = ["Rule", "load_rule", "load_rules", "matches", "fires_on_any"]
+
+
+def _regexp(pattern: str, value: str | None) -> bool:
+    return value is not None and re.search(pattern, value) is not None
+
+
+def matches(rule: Rule, event: dict) -> bool:
+    """Same as dac.matches, plus a REGEXP function (SigmaHQ rules use |re; dac's own rules never did).
+
+    Candidate upstream fix for detection-as-code.
+    """
+    query = sqliteBackend().convert(rule.collection())[0]
+    columns = set(event) | _detection_fields(rule.raw["detection"])
+    db = sqlite3.connect(":memory:")
+    db.create_function("REGEXP", 2, _regexp, deterministic=True)
+    db.execute(f"CREATE TABLE logs ({', '.join(f'\"{c}\" TEXT' for c in sorted(columns))})")
+    db.execute(f"INSERT INTO logs ({', '.join(f'\"{c}\"' for c in event)}) VALUES ({', '.join('?' for _ in event)})",
+               [str(v) for v in event.values()])
+    return db.execute(query).fetchone() is not None
 
 
 def load_rule(path: Path) -> Rule:

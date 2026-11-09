@@ -1,9 +1,9 @@
 PY ?= python3
 export PYTHONPATH := $(CURDIR)
 
-.PHONY: all setup fetch pilot dcc test
+.PHONY: all setup fetch pilot dcc baseline test
 
-all: fetch pilot dcc test
+all: fetch pilot dcc baseline test
 
 setup:
 	git submodule update --init --recursive
@@ -17,6 +17,9 @@ pilot:            ## data/pilot_implementations.csv
 
 dcc:              ## data/pilot_rules.csv, data/dcc_claims.csv, data/manual_baseline.csv
 	$(PY) scripts/run_dcc.py
+
+baseline:         ## data/expected_events.jsonl, data/predicted_baseline.csv
+	$(PY) scripts/predicted_baseline.py
 
 test:
 	$(PY) -m pytest -q

@@ -1,0 +1,96 @@
+# Side-effect events an analyst EXPECTS each implementation to produce, beyond process
+# creation and PowerShell script blocks (those are generated from implementations.yaml).
+# Field names follow Sigma's Windows taxonomy (Sysmon / Security / System channels).
+# This is a prediction, made before execution. Reality may differ: that gap is a result.
+#
+# logsource: product/category or product/service, matching Sigma rule logsources.
+
+t1016-publicip:
+  - logsource: windows/network_connection
+    Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+    DestinationHostname: api.ipify.org
+    DestinationPort: "443"
+    Initiated: "true"
+    Protocol: tcp
+
+t1053-schtasks:
+  -
+    logsource: windows/security
+    EventID: "4698"
+    TaskName: \BPTestCli
+    TaskContent: <Task><Actions Context="Author"><Exec><Command>cmd</Command><Arguments>/c echo bp > C:\BPLab\task_ran.txt</Arguments></Exec></Actions></Task>
+    SubjectUserName: '{username}'
+  - logsource: windows/taskscheduler
+    EventID: "106"
+    TaskName: \BPTestCli
+    UserContext: '{computername}\{username}'
+  - logsource: windows/registry_set
+    EventType: SetValue
+    Image: C:\Windows\system32\svchost.exe
+    TargetObject: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestCli\Index
+    Details: DWORD (0x00000003)
+
+t1053-cim:
+  - logsource: windows/security
+    EventID: "4698"
+    TaskName: \BPTestCim
+    TaskContent: <Task><Actions Context="Author"><Exec><Command>cmd.exe</Command><Arguments>/c echo bp > C:\BPLab\task_ran.txt</Arguments></Exec></Actions></Task>
+    SubjectUserName: '{username}'
+  - logsource: windows/taskscheduler
+    EventID: "106"
+    TaskName: \BPTestCim
+    UserContext: '{computername}\{username}'
+  - logsource: windows/registry_set
+    EventType: SetValue
+    Image: C:\Windows\system32\svchost.exe
+    TargetObject: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestCim\Index
+    Details: DWORD (0x00000003)
+
+t1053-hidden:
+  # The measured step is deleting the SD value. Task creation happens in setup and is not measured.
+  - logsource: windows/registry_delete
+    EventType: DeleteValue
+    Image: C:\Windows\System32\reg.exe
+    TargetObject: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestHidden\SD
+
+t1053-ghosttask:
+  # GhostTask writes TaskCache keys directly; no Task Scheduler API, so no 4698 / 106 expected.
+  - logsource: windows/registry_set
+    EventType: SetValue
+    Image: C:\BPLab\bin\GhostTask.exe
+    TargetObject: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestGhost\Index
+    Details: DWORD (0x00000003)
+  - logsource: windows/registry_set
+    EventType: SetValue
+    Image: C:\BPLab\bin\GhostTask.exe
+    TargetObject: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\BPTestGhost\Id
+    Details: '{00000000-0000-0000-0000-000000000000}'
+
+t1543-create:
+  - logsource: windows/system
+    Provider_Name: Service Control Manager
+    EventID: "7045"
+    ServiceName: BPTestSvc
+    ImagePath: C:\BPLab\bin\bpsvc.exe
+    ServiceType: user mode service
+    StartType: demand start
+    AccountName: LocalSystem
+  - logsource: windows/security
+    EventID: "4697"
+    ServiceName: BPTestSvc
+    ServiceFileName: C:\BPLab\bin\bpsvc.exe
+    ServiceStartType: "3"
+    ServiceAccount: LocalSystem
+  - logsource: windows/registry_set
+    EventType: SetValue
+    Image: C:\Windows\system32\services.exe
+    TargetObject: HKLM\System\CurrentControlSet\Services\BPTestSvc\ImagePath
+    Details: C:\BPLab\bin\bpsvc.exe
+
+t1543-modify:
+  # sc config changes ImagePath; no 7045/4697 expected (those are for new installs).
+  - logsource: windows/registry_set
+    EventType: SetValue
+    Image: C:\Windows\system32\services.exe
+    TargetObject: HKLM\System\CurrentControlSet\Services\BPTestSvcMod\ImagePath
+    Details: C:\BPLab\bin\bpsvc2.exe
