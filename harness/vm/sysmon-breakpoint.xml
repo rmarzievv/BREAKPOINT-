@@ -1,0 +1,28 @@
+<!--
+  BREAKPOINT Sysmon config: log everything for the event types pilot rules use, no filters.
+  Ground truth needs "rule did not fire" to mean the logic missed, never that the config dropped the event.
+  Short-lived VM, so volume is acceptable. ProcessAccess (10) and ImageLoad (7) stay off: no pilot rule uses them.
+-->
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>SHA256,IMPHASH</HashAlgorithms>
+  <CheckRevocation>False</CheckRevocation>
+  <EventFiltering>
+    <RuleGroup name="all" groupRelation="or">
+      <ProcessCreate onmatch="exclude" />            <!-- 1 -->
+      <FileCreateTime onmatch="exclude" />           <!-- 2 -->
+      <NetworkConnect onmatch="exclude" />           <!-- 3 -->
+      <ProcessTerminate onmatch="exclude" />         <!-- 5 -->
+      <DriverLoad onmatch="exclude" />               <!-- 6 -->
+      <ImageLoad onmatch="include" />                <!-- 7 off -->
+      <CreateRemoteThread onmatch="exclude" />       <!-- 8 -->
+      <ProcessAccess onmatch="include" />            <!-- 10 off -->
+      <FileCreate onmatch="exclude" />               <!-- 11 -->
+      <RegistryEvent onmatch="exclude" />            <!-- 12, 13, 14 -->
+      <FileCreateStreamHash onmatch="exclude" />     <!-- 15 -->
+      <PipeEvent onmatch="exclude" />                <!-- 17, 18 -->
+      <WmiEvent onmatch="exclude" />                 <!-- 19, 20, 21 -->
+      <DnsQuery onmatch="exclude" />                 <!-- 22 -->
+      <FileDeleteDetected onmatch="exclude" />       <!-- 26 -->
+    </RuleGroup>
+  </EventFiltering>
+</Sysmon>

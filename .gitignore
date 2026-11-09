@@ -7,3 +7,4 @@ __pycache__/
 .DS_Store
 results/
 harness/lab.yaml
+harness/bin/out/

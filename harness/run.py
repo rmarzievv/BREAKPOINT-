@@ -124,6 +124,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", nargs="*", help="implementation ids")
     ap.add_argument("--reps", type=int)
+    ap.add_argument("--rep", type=int, default=1, help="number of the first repetition (host orchestrator runs one rep per VM revert)")
+    ap.add_argument("--out", type=Path, help="output directory (default results/<run_id>)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -141,7 +143,7 @@ def main() -> int:
 
     priv = privilege()
     run_id = dt.datetime.now().strftime("%Y%m%d-%H%M%S") + f"-{priv}"
-    out_dir = ROOT / "results" / run_id
+    out_dir = args.out or ROOT / "results" / run_id
     out_dir.mkdir(parents=True, exist_ok=True)
     out = (out_dir / "runs.jsonl").open("a", encoding="utf-8")
     print(f"run {run_id}: privilege={priv}, harness_pid={os.getpid()}")
@@ -149,7 +151,7 @@ def main() -> int:
     for impl in impls:
         if PRIV_RANK[impl["requires"]] > PRIV_RANK[priv] or (impl["requires"] != "system" and priv == "system"):
             continue  # admin/user implementations run in the elevated pass, system ones in the SYSTEM pass
-        for rep in range(1, reps + 1):
+        for rep in range(args.rep, args.rep + reps):
             marker = subprocess.Popen(["notepad.exe"]) if impl.get("marker") else None
             ctx = Context(known={**known, "marker_pid": str(marker.pid) if marker else ""},
                           run=execute, defender_events=defender_events)
